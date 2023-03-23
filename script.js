@@ -1,43 +1,59 @@
-let nombre, ej1, ej2, parcial, final, notaFinal, mensaje, continuar;
+const alumnos = [];
 
-do {
-    nombre = prompt("Ingrese el nombre del alumno:");
+while (true) {
+    const nombre = prompt("Ingrese el nombre del alumno:");
 
-    ej1 = parseFloat(prompt("Ingrese la nota del Ejercicio 1:"));
-    while (ej1 > 10) {
-        ej1 = parseFloat(prompt("La nota del Ejercicio 1 no puede ser mayor a 10. Ingrese una nota válida:"));
+    const notas = {
+        ejercicio1: Number(prompt("Ingrese la nota del Ejercicio 1 (Entre 0 y 10)")),
+        ejercicio2: Number(prompt("Ingrese la nota del Ejercicio 2 (Entre 0 y 10)")),
+        parcial: Number(prompt("Ingrese la nota del Parcial (Entre 0 y 10)")),
+        examenFinal: Number(prompt("Ingrese la nota del Examen Final (Entre 0 y 10)")),
+    };
+
+    // Validar que las notas estén entre 1 y 10
+    const notasValidas = Object.values(notas).every(nota => nota >= 1 && nota <= 10);
+
+    if (!notasValidas) {
+        alert("Error: las notas deben estar entre 1 y 10.");
+        continue;
     }
 
-    ej2 = parseFloat(prompt("Ingrese la nota del Ejercicio 2:"));
-    while (ej2 > 10) {
-        ej2 = parseFloat(prompt("La nota del Ejercicio 2 no puede ser mayor a 10. Ingrese una nota válida:"));
+    for (const nota in notas) {
+        if (notas[nota] > 10) {
+            alert(`Error: la nota de ${nota} debe ser menor o igual a 10.`);
+            continue;
+        }
     }
 
-    parcial = parseFloat(prompt("Ingrese la nota del Examen Parcial:"));
-    while (parcial > 10) {
-        parcial = parseFloat(prompt("La nota del Examen Parcial no puede ser mayor a 10. Ingrese una nota válida:"));
-    }
+    const notaFinal = calcularNotaFinal(notas);
 
-    final = parseFloat(prompt("Ingrese la nota del Examen Final:"));
-    while (final > 10) {
-        final = parseFloat(prompt("La nota del Examen Final no puede ser mayor a 10. Ingrese una nota válida:"));
-    }
+    const alumno = {
+        nombre,
+        notas,
+        notaFinal,
+    };
 
-    // nota final
-    notaFinal = (ej1 * 0.15) + (ej2 * 0.15) + (parcial * 0.3) + (final * 0.4);
-    notaFinal = parseFloat(notaFinal.toFixed(2)); // 2 decimales
+    const mensaje = `${alumno.nombre} tiene una nota final de ${alumno.notaFinal.toFixed(2)}.`;
 
-
-    mensaje = `${nombre} tiene de nota ${notaFinal}.`;
-    if (notaFinal >= 4) {
-        mensaje += " Por lo que está APROBADO.";
+    if (alumno.notaFinal >= 4) {
+        alert(`Aprobado! ${mensaje}`);
     } else {
-        mensaje += " Por lo que está DESAPROBADO.";
+        alert(`Desaprobado. ${mensaje}`);
     }
 
-    // mensaje
-    alert(mensaje);
+    alumnos.push(alumno);
 
-    // Pregunta
-    continuar = confirm("¿Desea continuar ingresando notas?");
-} while (continuar);
+    const seguir = prompt("¿Desea agregar otro alumno?").toUpperCase();
+
+    if (seguir === "N") {
+        break;
+    }
+}
+
+function calcularNotaFinal(notas) {
+    const notaEjercicio1 = notas.ejercicio1 * 0.15;
+    const notaEjercicio2 = notas.ejercicio2 * 0.15;
+    const notaParcial = notas.parcial * 0.3;
+    const notaExamenFinal = notas.examenFinal * 0.4;
+    return notaEjercicio1 + notaEjercicio2 + notaParcial + notaExamenFinal;
+}
