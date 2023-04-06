@@ -1,0 +1,59 @@
+body {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+#cursos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.curso {
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.curso.seleccionado {
+    background-color: #44aa44;
+}
+
+#seleccionados {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #333333;
+}
+
+#lista-seleccionados {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#botones-seleccion {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#confirmar-seleccion,
+#cancelar-seleccion {
+    background-color: #666666;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+#confirmar-seleccion:hover,
+#cancelar-seleccion:hover {
+    background-color: #444444;
+}
