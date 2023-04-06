@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script>
-
+    <title>Selección de cursos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    A ver si aprobaste
-    <br> Las notas van entre 1 y 10
+    <h1>Seleccione sus cursos</h1>
+    <div id="cursos">
+        <!-- Cursos -->
+    </div>
+    <div id="seleccionados">
+        <p id="creditos-seleccionados">Total de créditos seleccionados: 0</p>
+
+        <h2>Cursos seleccionados:</h2>
+        <ul id="lista-seleccionados">
+
+        </ul>
+        <div id="botones-seleccion">
+            <button id="confirmar-seleccion">Confirmar selección</button>
+            <button id="cancelar-seleccion">Cancelar selección</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 
 </html>
