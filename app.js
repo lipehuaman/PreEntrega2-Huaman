@@ -1,46 +1,4 @@
-// Cursos disponibles
-const cursos = [{
-        nombre: 'Matemáticas I',
-        creditos: 3
-    },
-    {
-        nombre: 'Química I',
-        creditos: 4
-    },
-    {
-        nombre: 'Física I',
-        creditos: 4
-    },
-    {
-        nombre: 'Introducción a la programación',
-        creditos: 3
-    },
-    {
-        nombre: 'Historia universal',
-        creditos: 2
-    },
-    {
-        nombre: 'Inglés I',
-        creditos: 3
-    },
-    {
-        nombre: 'Economía I',
-        creditos: 3
-    },
-    {
-        nombre: 'Filosofía I',
-        creditos: 2
-    },
-    {
-        nombre: 'Biología I',
-        creditos: 4
-    },
-    {
-        nombre: 'Métodos de investigación',
-        creditos: 2
-    }
-];
-
+let cursos = [];
 
 let seleccionados = [];
 const maxCreditos = 21;
@@ -63,10 +21,12 @@ function actualizarSeleccionados() {
     const listaSeleccionados = document.getElementById('lista-seleccionados');
     listaSeleccionados.innerHTML = '';
     let totalCreditos = 0;
+    const cursosAlmacenados = JSON.parse(localStorage.getItem('cursos')); 
     seleccionados.forEach(curso => {
-        const item = crearElemento('li', null, curso.nombre + ' (' + curso.creditos + ' créditos)');
+        const cursoCompleto = cursosAlmacenados.find(c => c.nombre === curso.nombre);
+        const item = crearElemento('li', null, cursoCompleto.nombre + ' (' + cursoCompleto.creditos + ' créditos)');
         listaSeleccionados.appendChild(item);
-        totalCreditos += curso.creditos;
+        totalCreditos += cursoCompleto.creditos;
     });
     const textoCreditos = 'Total de créditos seleccionados: ' + totalCreditos;
     const creditosSeleccionados = document.getElementById('creditos-seleccionados');
@@ -119,7 +79,6 @@ function cargarCursos() {
 }
 
 
-
 function reiniciarSeleccion() {
     seleccionados = [];
     actualizarSeleccionados();
@@ -138,6 +97,10 @@ function confirmarSeleccion() {
     const contenidoPopup = crearElemento('div', 'contenido-popup');
     const tituloPopup = crearElemento('h2', null, 'Cursos seleccionados:');
     contenidoPopup.appendChild(tituloPopup);
+    if (seleccionados.length > 5) {
+        const nota = crearElemento('p', null, 'Recuerda que el número máximo de cursos seleccionados es 5');
+        contenidoPopup.appendChild(nota);
+    }
     const listaPopup = crearElemento('ul', null, null);
     seleccionados.forEach(curso => {
         const item = crearElemento('li', null, curso.nombre + ' (' + curso.creditos + ' créditos)');
@@ -152,6 +115,22 @@ function confirmarSeleccion() {
     reiniciarSeleccion();
 }
 
+function cargarCursos() {
+    const cursosDiv = document.getElementById('cursos');
+    const cursosAlmacenados = JSON.parse(localStorage.getItem('cursos')); 
+    cursosAlmacenados.forEach(curso => {
+        const cajaCurso = crearElemento('div', 'curso', curso.nombre + ' (' + curso.creditos + ' créditos)');
+        cajaCurso.id = curso.nombre;
+        cajaCurso.addEventListener('click', () => {
+            if (seleccionados.includes(curso)) {
+                quitarCurso(curso);
+            } else {
+                agregarCurso(curso);
+            }
+        });
+        cursosDiv.appendChild(cajaCurso);
+    });
+}
 
 function main() {
     cargarCursos();
@@ -161,6 +140,5 @@ function main() {
     const cancelarSeleccionBtn = document.getElementById('cancelar-seleccion');
     cancelarSeleccionBtn.addEventListener('click', reiniciarSeleccion);
 }
-
 
 document.addEventListener('DOMContentLoaded', main);
