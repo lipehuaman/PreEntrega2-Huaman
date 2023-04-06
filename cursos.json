@@ -1,0 +1,41 @@
+[{
+        "nombre": "Matemáticas I",
+        "creditos": 3
+    },
+    {
+        "nombre": "Química I",
+        "creditos": 4
+    },
+    {
+        "nombre": "Física I",
+        "creditos": 4
+    },
+    {
+        "nombre": "Introducción a la programación",
+        "creditos": 3
+    },
+    {
+        "nombre": "Historia universal",
+        "creditos": 2
+    },
+    {
+        "nombre": "Inglés I",
+        "creditos": 3
+    },
+    {
+        "nombre": "Economía I",
+        "creditos": 3
+    },
+    {
+        "nombre": "Filosofía I",
+        "creditos": 2
+    },
+    {
+        "nombre": "Biología I",
+        "creditos": 4
+    },
+    {
+        "nombre": "Métodos de investigación",
+        "creditos": 2
+    }
+]
